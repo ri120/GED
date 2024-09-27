@@ -14,7 +14,6 @@ import tn.barmegtech.solutionGED.entites.ThemDoc;
 @Getter
 @Setter
 @Builder
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 public class DirectionDto {

@@ -52,14 +52,29 @@ private final DirectionRepository directionRepository;
 
 	@Override
 	public DirectionDto saveDirection(DirectionDto directionDto) {
-		// TODO Auto-generated method stub
-		return null;
+		Direction direction=DirectionDto.toentity(directionDto);
+		Direction directionsved=directionRepository.save(direction);
+		DirectionDto directiondto=DirectionDto.fromentity(directionsved);
+		return directiondto;
 	}
 
 	@Override
 	public DirectionDto updateDirectionDto(DirectionDto directionDto) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<Direction> optionalDirection=directionRepository.findById(directionDto.getId());
+		
+		
+		if(optionalDirection.isPresent())
+		{
+			Direction direction=DirectionDto.toentity(directionDto);
+			optionalDirection.get().setTitre(direction.getTitre());
+			optionalDirection.get().setObservation(direction.getObservation());
+			return DirectionDto.fromentity(directionRepository.save(optionalDirection.get())) ;
+		  
+		}
+		else
+		{
+			throw new RuntimeException("not found");
+		}
 	}
 
 	
